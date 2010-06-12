@@ -6,7 +6,17 @@ include FileUtils
 module BlogHelper
 
   class Article
-    attr_accessor :title, :date, :permalink, :abstract, :tags
+    attr_accessor :title, :date, :url, :abstract, :tags
+  end
+
+  class Tag
+    attr_accessor :title, :rate, :urls
+
+    def initialize title, url
+      @title = title
+      @rate = 1
+      @urls = [url]
+    end
   end
 
 
@@ -17,7 +27,7 @@ module BlogHelper
       if f =~ /([0-9]{14})_(.+)\.haml/
         data = File.read(f)
         article = Article.new
-        article.permalink = articles_dir + "/#{$1}_#{$2}.html"
+        article.url = articles_dir + "/#{$1}_#{$2}.html"
         article.date = DateTime.parse $1
         article.title = extract_instance_variable(data, :title)
         article.abstract = extract_instance_variable(data, :abstract)
@@ -30,20 +40,25 @@ module BlogHelper
 
 
   def tags
-    tags = []
-    rates = {}
+    tags = {}
 
     blog do |artcl|
-      tags << artcl.tags
+      artcl.tags.each do |tag|
+        if tags.has_key? tag
+          tags[tag].urls << artcl.url
+          tags[tag].rate += 1 if tags.has_key? tag
+        else
+          tags[tag] = Tag.new tag, artcl.url
+        end
+      end
     end
     
-    tags.flatten.each do |tag|
-      rates[tag] = 0 unless rates.has_key? tag
-      rates[tag] += 1
+    rates = tags.values.collect {|tag| tag.rate}
+    max = rates.max
+    tags.values.shuffle.each do |tag|
+      tag.rate = (tag.rate/max*6).ceil
+      yield tag
     end
-
-    max = rates.values.max.to_f
-    rates.collect { |tag, count| yield [tag, (count/max*6).ceil] }
   end
 
 

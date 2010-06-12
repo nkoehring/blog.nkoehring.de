@@ -1,0 +1,53 @@
+- @title = "VIM configuration for this blog"
+- @abstract = "I have configured VIM to help me with file names and give me a dummy article"
+- @lang = "en"
+- @tags = %w(VIM programming)
+
+:textile
+  p. I have configured VIM to help me with file names and give me a dummy article. For this I have written two simple functions @Blog_RenameArtice()@ and @Blog_NewArticle()@. The first one renames the article file to the current date. The less inserts an article dummy to any new opened article.
+
+  p. Here they are:
+
+  bc.. " blog entry auto renaming
+  function! Blog_RenameArticle()
+      " paranoia?
+      if isdirectory(expand("%"))
+          return
+      endif
+  
+      let abspath = expand("%:p:h")
+      if abspath !~ 'blog\.nkoehring\.de/src/pages/articles'
+          return
+      endif
+  
+      let filename = expand("%:t")
+      let matches = matchlist(filename, '\(\d\{14}\)\(\p\+\)')
+  
+      if len(matches) > 0
+          let oldname = abspath.'/'.matches[0]
+          let newname = abspath.'/'.strftime("%Y%m%d%H%M%S").matches[2]
+          call rename(oldname, newname)
+          execute ":saveas! ".newname
+      else
+          execute ":saveas " .abspath. "/" .strftime("%Y%m%d%H%M%S"). "_" .filename
+      endif
+  endfunction
+  
+  bc.. " dummy for new blog entry
+  function! Blog_NewArticle()
+      if expand("%:p:h") =~ 'blog\.nkoehring\.de/src/pages/articles'
+          source /home/psy/.vim/headers/article.haml
+      endif
+  endfunction
+
+  p. I further needed to add following two lines to my @.vimrc@:
+
+  bc. autocmd BufWritePre *.haml call Blog_RenameArticle()
+  autocmd BufNewFile *.haml call Blog_NewArticle()
+
+  p. As you may see the functions check for a correct file path (in a lazy way, I know) and therefor only do something if I create or save a buffer in the articles directory.
+
+  p. Next step to do: Complete the tagging feature of this blog.
+
+  p. Good night.
+

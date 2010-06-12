@@ -5,6 +5,6 @@
 -blog do |artcl|
   .header_container
     %h2
-      %a{ :href => artcl.permalink }= artcl.title
+      %a{ :href => artcl.url }= artcl.title
       %span.date= artcl.date.strftime "%Y-%m-%d %H:%M"
   .abstract&= artcl.abstract

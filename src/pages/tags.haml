@@ -1,7 +1,14 @@
 -@title="Tags…"
 -@flourish="&#57346;"
 
-#tags
-  -tags do |tag, rate|
-    %span{ :class => "rate_#{rate}" }= tag
+This page isn't finished yet… sorry.
+
+%ul#tags
+  -tags do |tag|
+    %li{ :class => "rate_#{tag.rate}" }
+      =tag.title
+      %ul
+        -tag.urls.each do |url|
+          %li
+            %a{ :href => url, :alt => tag }= url
 
