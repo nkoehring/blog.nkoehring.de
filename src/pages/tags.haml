@@ -5,10 +5,11 @@ This page isn't finished yet… sorry.
 
 %ul#tags
   -tags do |tag|
-    %li{ :class => "rate_#{tag.rate}" }
+    %span{ :class => "rate_#{tag.rate} tag" }
       =tag.title
       %ul
-        -tag.urls.each do |url|
+        -tag.articles.each do |article|
           %li
-            %a{ :href => url, :alt => tag }= url
+            %a{ :href => article.url, :alt => article.title }= article.title
+            .abstract= article.abstract
 

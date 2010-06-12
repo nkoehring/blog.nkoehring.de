@@ -8,7 +8,8 @@
 
   p. Here they are:
 
-  bc.. " blog entry auto renaming
+  <source:vim>
+  " blog entry auto renaming
   function! Blog_RenameArticle()
       " paranoia?
       if isdirectory(expand("%"))
@@ -32,18 +33,23 @@
           execute ":saveas " .abspath. "/" .strftime("%Y%m%d%H%M%S"). "_" .filename
       endif
   endfunction
+  </source>
   
-  bc.. " dummy for new blog entry
+  <source:vim>
+  " dummy for new blog entry
   function! Blog_NewArticle()
       if expand("%:p:h") =~ 'blog\.nkoehring\.de/src/pages/articles'
           source /home/psy/.vim/headers/article.haml
       endif
   endfunction
+  </source>
 
   p. I further needed to add following two lines to my @.vimrc@:
 
-  bc. autocmd BufWritePre *.haml call Blog_RenameArticle()
+  <source:vim>
+  autocmd BufWritePre *.haml call Blog_RenameArticle()
   autocmd BufNewFile *.haml call Blog_NewArticle()
+  </source>
 
   p. As you may see the functions check for a correct file path (in a lazy way, I know) and therefor only do something if I create or save a buffer in the articles directory.
 

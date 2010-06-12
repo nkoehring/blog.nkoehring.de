@@ -10,12 +10,12 @@ module BlogHelper
   end
 
   class Tag
-    attr_accessor :title, :rate, :urls
+    attr_accessor :title, :rate, :articles
 
-    def initialize title, url
+    def initialize title, article
       @title = title
       @rate = 1
-      @urls = [url]
+      @articles = [article]
     end
   end
 
@@ -45,10 +45,10 @@ module BlogHelper
     blog do |artcl|
       artcl.tags.each do |tag|
         if tags.has_key? tag
-          tags[tag].urls << artcl.url
+          tags[tag].articles << artcl
           tags[tag].rate += 1 if tags.has_key? tag
         else
-          tags[tag] = Tag.new tag, artcl.url
+          tags[tag] = Tag.new tag, artcl
         end
       end
     end
