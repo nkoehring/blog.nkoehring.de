@@ -1,0 +1,32 @@
+h1. How to write an article
+
+Best examples for how to write articles are the existing ones. But to be sure anyone is able to 
+write an article:
+
+The naming scheme of every article file is YYYYMMbDDhhmmss_your_nice_headline.haml, simple 
+creatable with following command:
+
+  @vim $(date '+%Y%m%d%H%M%S_my_cool_article.haml')@
+
+Now every article file needs some variables. It is way less painful than it sounds. Look at this 
+example:
+
+<pre>
+<code>
+  - @title = "test article"
+  - @abstract = "Hello, I am a test article. My purpose is to test something."
+  - @lang = "en"
+  - @tags = %w(foo baz)
+
+  :textile
+    some more content
+</code>
+</pre>
+
+The variables are self explaining, aren't they?
+Below the line with @:textile@ begins the article itself. Of course @:textile@ is not the only 
+markdown HAML understands. You can for example use @:plain@ / @:escaped@ or @:markdown@ or 
+@:maruku@. See the "HAML reference":http://haml-lang.com/docs/yardoc/file.HAML_REFERENCE.html#filters
+for more information.
+
+Any more questions? Write a "mail":mailto:nkoehringætnkoehring.de!
