@@ -26,7 +26,6 @@ example:
 The variables are self explaining, aren't they?
 Below the line with @:textile@ begins the article itself. Of course @:textile@ is not the only 
 markdown HAML understands. You can for example use @:plain@ / @:escaped@ or @:markdown@ or 
-@:maruku@. See the "HAML reference":http://haml-lang.com/docs/yardoc/file.HAML_REFERENCE.html#filters
-for more information.
+@:maruku@. See the "HAML reference":http://haml-lang.com/docs/yardoc/file.HAML_REFERENCE.html#filters for more information.
 
 Any more questions? Write a "mail":mailto:nkoehringætnkoehring.de!
