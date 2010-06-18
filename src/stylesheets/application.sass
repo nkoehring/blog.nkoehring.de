@@ -63,6 +63,9 @@ body
     position: 0.5em 0
     repeat: no-repeat
 
+br
+  clear: both
+
 pre
   padding: 1em
   font-size: 12px
@@ -74,7 +77,32 @@ pre
 code
   font-size: 14px
 
-img
+.image
+  overflow: hidden
+  border: none
+
+  &.left
+    float: left
+    margin: 4px 5px 5px 0
+  &.right
+    float: right
+    margin: 4px 0 5px 5px
+
+  a,img
+    border: none
+
+  img.hover
+    display: none
+
+  &:hover
+    img
+      display: none
+    img.hover
+      display: block
+      cursor: pointer
+
+
+img[alt="BBLA-Logger"]
   visibility: hidden
 
 .header_container

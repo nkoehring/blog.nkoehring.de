@@ -1,0 +1,33 @@
+- @title = "picture test article"
+- @abstract = "The purpose of this article is only to show some pictures floating inside a lot of lorem ipsum."
+- @lang = "int"
+- @tags = %w(test thisBlog)
+
+
+.image.left
+  %a( href="/images/20100618/music_is_life.jpg" )
+    %img.hover( src="/images/20100618/thumb2_music_is_life.png" )
+    %img( src="/images/20100618/thumb_music_is_life.png" )
+
+:textile
+  Last night I've played with "ImageMagick":http://www.imagemagick.org. The result is a script which creates thumbnails such as the one on the left and the other ones on this page. The script creates two thumbnails for every picture. An _inactive_ or _unhovered_ variant to see if you are not hovering the image and an _active_ or _hovered_ variant with. The pictures are currently added by hand because I don't have written a helper for this, yet. After finishing it I'll make the helper and my imagemagick script public on github.
+
+
+.image.right
+  %a( href="/images/20100618/nasses_haar.jpg" )
+    %img.hover( src="/images/20100618/thumb2_nasses_haar.png" )
+    %img( src="/images/20100618/thumb_nasses_haar.png" )
+
+:textile
+  If you hover the thumbnails you'll see the sharper, non-transparent and annotated version. This is simply realized via CSS' @:hover@. For your fourther interest: I got the first and second images from "DesignNation":http://designnation.de. The third one is a typical google-image-search-finding. So I don't know where exactly it comes from and hope it is okay to publish it here. If you know it is not, please send me a "mail":mailto:nkoehringænkoehring.de, thanks.
+
+.image.left
+  %a( href="/images/20100618/berlin_1927.jpg" )
+    %img.hover( src="/images/20100618/thumb2_berlin_1927.png" )
+    %img( src="/images/20100618/thumb_berlin_1927.png" )
+
+:textile
+  My night had about six hours of programming and playing around with ImageMagick plus about four hours of sleep. I'll be very, very tired over day. …whatever! I have cool thumbnails now!
+
+  …of to work.
+
