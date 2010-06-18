@@ -78,8 +78,8 @@ code
   font-size: 14px
 
 .image
-  overflow: hidden
   border: none
+  padding: 0
 
   &.left
     float: left
@@ -90,14 +90,16 @@ code
 
   a,img
     border: none
+    display: block
 
   img.hover
     display: none
 
   &:hover
+    padding: 0
     img
       display: none
-    img.hover
+    a, img.hover
       display: block
       cursor: pointer
 
