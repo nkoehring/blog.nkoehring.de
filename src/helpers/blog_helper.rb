@@ -1,6 +1,6 @@
 require 'date'
 require 'fileutils'
-include FileUtils
+require 'pathname'
 
 
 module BlogHelper
@@ -59,6 +59,25 @@ module BlogHelper
       tag.rate = (tag.rate/max*6).ceil
       yield tag
     end
+  end
+
+
+  def insert_picture uri, name
+    dir = Pathname("site/images/") + Date.today.strftime("%Y%m%d")
+    FileUtils.mkdir_p dir
+
+    if uri =~ /^[a-z]{3,5}:\/{2}.*\..{2,5}\//
+      # it's an URL, so we need to download the picture first
+      return nil unless system "wget #{uri} -O #{dir+name}"
+    else
+      # it's a local file, so we need to copy it into the blog images directory
+      return nil unless File.exist? uri
+      FileUtils.cp(uri, dir+name)
+    end
+
+    return nil unless system "src/helpers/create_thumbs.sh #{dir+name}"
+
+    [Date.today.strftime("%Y%m%d"), name]
   end
 
 

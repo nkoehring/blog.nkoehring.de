@@ -1,0 +1,14 @@
+-path, orig = insert_picture uri, name
+-name = name.sub(/\.[^\.]+$/, "")
+-thumb = "/images/#{path}/thumb_#{name}.png"
+-thumb2 = "/images/#{path}/thumb2_#{name}.png"
+
+-if orig
+  .image.left
+    %a{ :href => "/images/#{path}/#{orig}" }
+      %img.hover{ :src => thumb2 }
+      %img{ :src => thumb }
+-else
+  .image.left
+    %img( src="/images/thumb_404.png" )
+
