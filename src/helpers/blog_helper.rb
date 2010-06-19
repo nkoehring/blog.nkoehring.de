@@ -54,26 +54,11 @@ module BlogHelper
     end
     
     rates = tags.values.collect {|tag| tag.rate}
-    max = rates.max
+    max = rates.max.to_f
     tags.values.shuffle.each do |tag|
       tag.rate = (tag.rate/max*6).ceil
       yield tag
     end
-  end
-
-
-  def random_tags
-    tags = {
-      'lorem' => 1,
-      'ipsum' => 2,
-      'sit' => 3,
-      'dolor' => 4,
-      'amet' => 5,
-      'consetetur' => 6
-    }
-
-    keys = tags.keys.collect {|x| [x] * ((rand*15)+1) }
-    keys.flatten.shuffle.collect { |x| yield [x, tags[x]] }
   end
 
 
