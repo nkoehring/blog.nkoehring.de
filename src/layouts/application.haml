@@ -22,31 +22,33 @@
         #inner
           #head
             %ul
-              -articles_is_current = (current_page == "/index.html" ? "current" : "")
-              -tags_is_current = (current_page == "/tags.html" ? "current" : "")
-              -about_is_current = (current_page == "/about.html" ? "current" : "")
-              %li{ :class => articles_is_current }
+              %li{ :class => current?("/index.html") }
                 %div
                   %a{ :href => "/", :tabindex => 1, :accesskey => "s" } articles
-              %li{ :class => tags_is_current }
+              %li{ :class => current? ("/tags.html") }
                 %div
                   %a{ :href => "/tags.html", :tabindex => 3, :accesskey => "t" } tags
-              %li{ :class => about_is_current }
+              %li{ :class => current? ("/about.html") }
                 %div
                   %a{ :href => "/about.html", :tabindex => 2, :accesskey => "a" } about
               %li.right
                 %div
                   %a{ :href => "http://nkoehring.de", :tabindex => 4, :accesskey => "b" } go back
 
+
           -if @title
             .header_container
               %h1
                 =@title
-                -# just a little baublery
-                -if @flourish == "penguin"
-                  %span.penguin &#57344;
+                -if menu_page?
+                  -# just a little baublery
+                  -if @flourish == "penguin"
+                    %span.penguin &#57344;
+                  -else
+                    %span.flourish=@flourish
                 -else
-                  %span.flourish=@flourish
+                  -date = DateTime.parse(File.basename(current_page)[0,14])
+                  %span.date=date.strftime "%Y-%m-%d %H:%M"
 
           #body
             =yield

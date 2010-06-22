@@ -20,6 +20,17 @@ module BlogHelper
   end
 
 
+  def current? page
+    current_page == page ? "current" : nil
+  end
+
+
+  def menu_page?
+    menu_pages = %w(/index.html /tags.html /about.html)
+    menu_pages.index current_page
+  end
+
+
   def blog articles_dir = "articles"
     dir = File.join(Dir.getwd, 'src', 'pages', articles_dir)
     articles = []
