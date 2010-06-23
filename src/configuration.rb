@@ -17,3 +17,7 @@ configuration.haml_options = {
 
 RedclothCoderay.coderay_options :line_numbers => :table
 
+# blog configuration
+$articles_per_page = 2
+$articles_dir = "articles"
+

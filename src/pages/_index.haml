@@ -1,0 +1,10 @@
+-@title=nil
+-@flourish=nil
+
+-blog page do |artcl|
+  .header_container
+    %h2
+      %a{ :href => artcl.url }= artcl.title
+      %span.date= artcl.date.strftime "%Y-%m-%d %H:%M"
+  .abstract&= artcl.abstract
+

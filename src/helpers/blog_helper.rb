@@ -4,7 +4,6 @@ require 'pathname'
 
 
 module BlogHelper
-
   class Article
     attr_accessor :title, :date, :url, :abstract, :tags
   end
@@ -31,14 +30,14 @@ module BlogHelper
   end
 
 
-  def blog articles_dir = "articles"
-    dir = File.join(Dir.getwd, 'src', 'pages', articles_dir)
+  def all_articles
+    dir = File.join(Dir.getwd, 'src', 'pages', $articles_dir)
     articles = []
     Dir["#{dir}/*.haml"].each do |f|
       if f =~ /([0-9]{14})_(.+)\.haml/
         data = File.read(f)
         article = Article.new
-        article.url = articles_dir + "/#{$1}_#{$2}.html"
+        article.url = $articles_dir + "/#{$1}_#{$2}.html"
         article.date = DateTime.parse $1
         article.title = extract_instance_variable(data, :title)
         article.abstract = extract_instance_variable(data, :abstract)
@@ -46,7 +45,21 @@ module BlogHelper
         articles << article
       end
     end
-    articles.sort_by { |item| item.date }.reverse_each { |item| yield item }
+    articles
+  end
+
+
+  def blog page = :all
+    if page == :all
+      a, b = 0, articles.length
+    else
+      page = 1 if page < 1
+      a = $articles_per_page * (page - 1)
+      b = a + $articles_per_page
+    end
+
+    articles = all_articles.sort_by{ |item| item.date }.reverse[a...b]
+    articles.each{ |item| yield item }
   end
 
 
