@@ -50,6 +50,7 @@ module BlogHelper
 
 
   def blog page = :all
+    articles = all_articles
     if page == :all
       a, b = 0, articles.length
     else

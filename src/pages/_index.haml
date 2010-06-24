@@ -1,6 +1,14 @@
 -@title=nil
 -@flourish=nil
 
+%p.pages
+  %span
+    goto page:
+    -(1..pages).each do |i|
+      -klass = (i == page ? "current" : "")
+      -url = (i<=1 ? "index.html" : "index#{i}.html")
+      %a( class="#{klass}" href="#{url}" alt="index page #{i}" )== [#{i}]
+
 -blog page do |artcl|
   .header_container
     %h2
