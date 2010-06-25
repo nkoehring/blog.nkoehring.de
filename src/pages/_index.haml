@@ -14,7 +14,13 @@
     %h2
       %a{ :href => artcl.url }= artcl.title
       %span.date= artcl.date.strftime "%Y-%m-%d %H:%M"
-  .abstract&= artcl.abstract
+  .abstract
+    &= artcl.abstract
+    .tags
+      -artcl.tags.each do |tag|
+        [
+        %a( href="/tags/#{tag}.html" alt="tag #{tag}" )>= tag
+        ]
 
 %p.pages
   %span

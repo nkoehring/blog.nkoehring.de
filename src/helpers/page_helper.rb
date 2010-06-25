@@ -17,5 +17,10 @@ module PageHelper
     end
     [n, all_articles.length, $articles_per_page]
   end
+
+  def create_tag_pages
+    layout = @staticmatic.source_for_layout
+  end
+
 end
  
