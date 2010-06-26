@@ -30,8 +30,15 @@ module BlogHelper
   end
 
   
-  def backlink
-    backlink = (menu_page? ? "http://nkoehring.de/" : "/")
+  def tags_page?
+    current_page =~ /\/tags\/.*\.html/
+  end
+
+  
+  def parent_url
+    parent = "/"
+    menu_page? and parent = "http://nkoehring.de/"
+    tags_page? and parent = "/tags.html"
   end
 
   def all_articles
