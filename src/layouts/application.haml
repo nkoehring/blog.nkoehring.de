@@ -24,16 +24,16 @@
             %ul
               %li{ :class => current?("/index.html") }
                 %div
-                  %a{ :href => "/", :tabindex => 1, :accesskey => "s" } articles
+                  %a( href="/" tabindex="1" accesskey="s" ) articles
               %li{ :class => current? ("/tags.html") }
                 %div
-                  %a{ :href => "/tags.html", :tabindex => 3, :accesskey => "t" } tags
+                  %a( href="/tags.html" tabindex="2" accesskey="t" ) tags
               %li{ :class => current? ("/about.html") }
                 %div
-                  %a{ :href => "/about.html", :tabindex => 2, :accesskey => "a" } about
+                  %a( href="/about.html" tabindex="3" accesskey="a" ) about
               %li.right
                 %div
-                  %a{ :href => "http://nkoehring.de", :tabindex => 4, :accesskey => "b" } go back
+                  %a( href="#{backlink}" tabindex="4" accesskey="b" ) go back
 
 
           -if @title

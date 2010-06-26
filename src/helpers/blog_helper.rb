@@ -29,6 +29,10 @@ module BlogHelper
     menu_pages.index current_page
   end
 
+  
+  def backlink
+    backlink = (menu_page? ? "http://nkoehring.de/" : "/")
+  end
 
   def all_articles
     dir = File.join(Dir.getwd, 'src', 'pages', $articles_dir)
