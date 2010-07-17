@@ -12,14 +12,14 @@
 -blog page do |artcl|
   .header_container
     %h2
-      %a{ :href => artcl.url }= artcl.title
+      %a{ :href => artcl.url, :alt => artcl.title, :title => artcl.title }= artcl.title
       %span.date= artcl.date.strftime "%Y-%m-%d %H:%M"
   .abstract
     &= artcl.abstract
     .tags
       -artcl.tags.each do |tag|
         [
-        %a( href="/tags/#{tag}.html" alt="tag #{tag}" )>= tag
+        %a( href="/tags.html" alt="tag #{tag}" )>= tag
         ]
 
 %p.pages
