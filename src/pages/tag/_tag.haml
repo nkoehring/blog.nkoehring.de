@@ -1,0 +1,9 @@
+-@title = tag.title
+-@abstract = "#{tag.articles.length} articles with this tag"
+
+%ul
+  -tag.articles.each do |article|
+    %li
+      %a{ :href => article.url, :alt => article.title }= article.title
+      .abstract= article.abstract
+
