@@ -263,41 +263,60 @@ a
   text-align: justify
   span.tag
     margin: 5px
-    &.rate_1
+    label.rate_1
       font-size: 0.8em
       color: $c_fg - #545
-    &.rate_2
+    label.rate_2
       font-size: 0.9em
       color: $c_fg - #434
-    &.rate_3
+    label.rate_3
       font-size: 1em
       color: $c_fg - #303
-    &.rate_4
+    label.rate_4
       font-size: 1em
       color: $c_fg - #101
-    &.rate_5
+    label.rate_5
       font-size: 1.2em
       color: $c_fg + #020
-    &.rate_6
+    label.rate_6
       font-size: 1.3em
       color: $c_fg + #131
     ul
       display: none
       position: absolute
+      list-style-type: circle
       top: inherit
       left: inherit
       padding: 0.3em 0.4em 0.3em 0.4em
       margin-top: -5px
       background-color: rgba(0, 0, 0, 0.8)
+      font-size: 20px
       text-align: center
       width: 500px
       +border
       +round_corners
-      li .abstract
-        font-size: 14px
+
+      .top
+        border-bottom: 1px dashed $c_bg
+        list-style-type: none
+
+      .bottom
+        border-top: 1px dashed $c_bg
+        list-style-type: none
+
+      .bottom, .article
+        +round_corners
+        &:hover
+          background-color: rgba(0, 204, 0, 0.2)
+
+      li
         margin: 0
-          bottom: 1em
-        padding: 0
+          top: 0.5em
+          bottom: 0.5em
+        .abstract
+          margin: 0
+          padding: 0
+
     &:hover
       ul
         display: block

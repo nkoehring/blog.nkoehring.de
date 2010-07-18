@@ -20,6 +20,15 @@ module PageHelper
 
   def create_tag_pages
     layout = @staticmatic.source_for_layout
+    FileUtils.mkdir_p 'site/tag'
+
+    tags do |tag|
+      content = partial('tag/tag', :locals => { :tag => tag })
+      File.open("site/tag/#{tag.title}.html", 'w') do |f|
+        f.write @staticmatic.generate_html_from_template_source(layout) { content }
+      end
+    end
+
   end
 
 end

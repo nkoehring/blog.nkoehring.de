@@ -5,11 +5,18 @@ This page isn't finished yet… sorry.
 
 %ul#tags
   -tags do |tag|
-    %span{ :class => "rate_#{tag.rate} tag" }
-      =tag.title
+    %span.tag
+      %label{ :class => "rate_#{tag.rate}" }=tag.title
       %ul
-        -tag.articles.each do |article|
-          %li
+        .top== #{tag.articles.length} article(s) tagged with »#{tag.title}«
+        -tag.articles[0,3].each do |article|
+          %li.article
             %a{ :href => article.url, :alt => article.title }= article.title
             .abstract= article.abstract
+
+        -if tag.articles.length > 3
+          …
+
+        .bottom
+          %a( href="/tag/#{tag.title}.html" alt="tag #{tag.title}" )>all articles with this tag
 
