@@ -16,9 +16,9 @@
 
   Show only items with…
     * quality of delivery in area 2 lesser than 80%
-      @(qd2 &lt; 80)@
+      @(qd2 < 80)@
    * requests between May and June, 2010
      @(request_date >= 2010-05-01 AND request_date < 2010-07-01)@
-   * from "Munich"
+   * requests from "Munich"
      @(request_city == "Munich")@
 
