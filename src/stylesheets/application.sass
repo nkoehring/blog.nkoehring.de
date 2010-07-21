@@ -58,13 +58,23 @@ body
   color: $c_fg
   background:
     color: $c_bg
-    image: url(/images/bg.jpg)
-    attachment: fixed
-    position: 0.5em 0
-    repeat: no-repeat
+    //image: url(/images/bg.jpg)
+    //attachment: fixed
+    //position: 0.5em 0
+    //repeat: no-repeat
 
 br
   clear: both
+
+canvas
+  border: none
+  position: fixed
+  top: 0
+  left: inherit
+  z-index: -1
+
+#bg_canvas
+  margin-left: -288px
 
 pre
   padding: 1em
@@ -190,10 +200,10 @@ a
   +border
   background:
     color: transparent
-    image: url(/images/bg_effect.png)
+    image: url(/images/bg_wrap.png)
     attachment: fixed
-    position: 0.5em 0
-    repeat: no-repeat
+    position: 0 0
+    repeat: repeat
   -moz-box-shadow: 5px 5px 15px black, -5px -5px 15px black
   -webkit-box-shadow: 5px 5px 15px black, -5px -5px 15px black
 
@@ -201,11 +211,11 @@ a
   margin: 0 auto
   width: $page_width + 0.2em
   background:
-    color: $c_bg
-    image: url(/images/bg_wrap.png)
-    attachment: fixed
-    position: 0 0
-    repeat: repeat
+    color: transparent
+    //image: url(/images/bg_effect.png)
+    //attachment: fixed
+    //position: 0.5em 0
+    //repeat: no-repeat
 
 #inner
   margin: 0 auto

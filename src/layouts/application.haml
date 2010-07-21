@@ -15,11 +15,12 @@
     %link{ :href => "mailto:me[at]nkoehring.de", :rel => "author" }
     %title< Lair of NKoehring
     %link( charset="utf-8" href="/stylesheets/application.css" media="screen" rel="stylesheet" title="Standard Layout" type="text/css" )
-    =javascripts 'jquery'
 
-  %body
+  %body( onLoad="effect();" )
     #page_wrapper
       #page
+        %canvas#bg_canvas( width=580 height=580 ) Foo?
+        %canvas#effect_canvas( width=280 height=580 ) Foo?
         #inner
           #head
             %ul
@@ -64,6 +65,88 @@
             &#9774;  <!-- peace //-->
             &#9775;  <!-- YinYang //-->
             &#10087; <!-- rotated floral heart bullet //-->
+
+    :javascript
+      // its better to load the images early
+      var bg_img = new Image();
+      var effect_img = new Image();
+      bg_img.src = '/images/bg.jpg';
+      effect_img.src = '/images/bg_effect.png';
+
+      function bind(context, name){ 
+        return function(){ 
+          return context[name].apply(context, arguments); 
+        }; 
+      } 
+
+      var Effect = function() {
+        if (!this.bg_canvas.getContext) {
+          this.active = false;
+        } else {
+          this.bg_ctx = this.bg_canvas.getContext('2d');
+          this.effect_ctx = this.effect_canvas.getContext('2d');
+
+          this.bg_ctx.translate(288,288);
+          this.effect_ctx.translate(0,288);
+
+          // adjust the image position inside the canvas
+          // and render it only inside the #page div
+          var page_height = document.getElementById('page').getClientRects()[0].height;
+          var y1 = -238;
+          var y2 = 295;
+          var maxh = (y2+Math.abs(y1) > page_height ? y1+page_height : y2);
+
+          with (this.effect_ctx) {
+            beginPath();
+            moveTo(-5, y1);
+            lineTo(295, y1);
+            lineTo(295,maxh);
+            lineTo(-5,maxh);
+            clip();
+          }
+
+          this.draw();
+        }
+      }
+
+      Effect.prototype = {
+        active: true,
+        angle: 0.002,
+        bg_canvas: document.getElementById('bg_canvas'),
+        effect_canvas: document.getElementById('effect_canvas'),
+        bg_img: bg_img,
+        effect_img: effect_img,
+        ticker: 0,
+
+        draw: function() {
+          if (!this.active || !this.bg_img.complete || !this.effect_img.complete) { return; }
+          this.bg_ctx.drawImage(this.bg_img,-288,-288,575,575);
+          this.effect_ctx.drawImage(this.effect_img,-288,-288,575,575);
+          this.bg_ctx.rotate(this.angle);
+          this.effect_ctx.rotate(this.angle);
+        },
+
+        onMousemove: function(event) {
+          this.ticker+=1;
+          if (this.ticker % 5 == 0) this.draw();
+          if (this.ticker > 5) this.ticker = 0;
+        }
+      }
+
+      function effect() {
+        var effect = new Effect();
+
+        // cross browser event listening >_<
+        document.body.onmousemove = bind(effect, "onMousemove");
+        /*
+        var body = document.body
+        if (body.addEventListener) { // its not IE :)
+          body.addEventListener('mousemove', effect.onMousemove, false);
+        } else if (body.attachEvent) { // its IE :-@
+          //Sorry, I hate IE and I even more hate its way to handle events!
+          alert("Please use a sane browser, next time!");
+        }*/
+      }
 
     / yeahahah... GoogleAnalytics my ass! I got the big brother now!
     :plain
